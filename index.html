@@ -33,7 +33,7 @@ h1.lg{font-size:64px;letter-spacing:6px;line-height:.95;-webkit-text-stroke:2px 
 #cv{position:absolute;inset:0;width:100%;height:100%;display:block}
 #nxw{position:absolute;right:2px;top:2px;width:64px;background:rgba(0,0,0,.6);border:1px solid var(--pl);text-align:center;font-size:9px;color:#8ad0ff;z-index:2}
 #n1{width:62px;height:62px;display:block}
-#ctl{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;padding:2px 8px 8px}
+#ctl{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;padding:2px 8px 8px;position:relative}#fcw{position:absolute;left:calc(20px + 2*var(--cd));right:calc(20px + 2*var(--s));bottom:calc(2*var(--cd) + var(--s)/2 - 6px);height:48px;z-index:1}#fcw b{font-size:24px;padding:0;line-height:1.15}
 #dp{display:grid;grid-template-columns:repeat(3,var(--cd));grid-template-rows:repeat(3,var(--cd));gap:2px;padding:4px;touch-action:none}
 #abc{display:grid;grid-template-columns:repeat(3,var(--s));grid-auto-rows:var(--s);gap:6px;margin-bottom:calc(var(--cd)*1.5 + 6px - var(--s)/2)}
 .b{min-height:48px;border:2px solid var(--pl);background:var(--bl);color:#fff;font:700 16px ui-monospace,Menlo,monospace;border-radius:10px;touch-action:none;padding:0 6px}
@@ -60,12 +60,12 @@ h2{margin:0;font-size:28px;color:#ff6fae;letter-spacing:3px}
 <div class="hr"><div class="c g"><i>FACES</i><b id="fc">0</b></div><div class="c" style="flex:1.4"><i>PIT</i><b id="pit">-</b></div><div class="c"><i>CUBES</i><b id="cb">0</b></div></div>
 <div id="stage"><div id="gauge"></div><div id="pitw"><div id="tex" class="p0"></div><canvas id="cv"></canvas><div id="tp" class="tp hide"></div><div id="nxw">NEXT<canvas id="n1" width="124" height="124"></canvas></div>
 <div class="ov" id="ov_logo"><h1 class="lg">BLOCK<br>OUT</h1><div class="sub">3D FALLING BLOCK PUZZLE</div><div class="tp" style="position:static;max-width:320px;text-align:center">FAN-MADE TRIBUTE<br>TAP TO START</div></div><div class="ov hide" id="ov_title"><h1 class="sm">ROUND SELECT</h1><div id="rounds" style="width:100%;display:flex;flex-direction:column;align-items:center;gap:6px"></div>
-<div style="display:flex;gap:8px"><button class="b snd" style="min-width:120px">SOUND ON</button><button class="b" id="howto" style="min-width:120px">HOW TO</button></div></div>
-<div class="ov hide" id="ov_help"><h2 style="color:#8ad0ff">HOW TO PLAY</h2><div class="help">・穴の真上から見下ろして遊ぶ<br>・十字キー：ブロックを移動<br>・A / B / C：X軸（横）/ Y軸（縦）/ Z軸（奥行き）まわりに回転<br>・DROP：一気に落とす<br>・落下中は白いワイヤー、着地すると色が付く<br>・左の色帯は積み上がった高さ（白枠が今のブロックの深さ）<br>・1段（FACE）を全部埋めると消える。FACESが0でステージクリア、穴の形が変わる<br>・次のブロックを置く場所が無いとゲームオーバー</div><button class="b" id="helpx">CLOSE</button></div>
-<div class="ov hide" id="ov_pause"><h2 style="color:#8ad0ff">PAUSE</h2><div class="sub">PAUSEボタンでも再開できます</div><button class="b" id="resume">RESUME</button><button class="b" id="restart">RESTART</button><button class="b" id="totitle1">ROUND SELECT</button><button class="b snd">SOUND ON</button><div class="sub" id="ver">VERSION</div></div>
+<div style="display:flex;gap:8px"><button class="b snd" style="min-width:120px">SOUND ON</button><button class="b" id="howto" style="min-width:120px">遊び方</button></div></div>
+<div class="ov hide" id="ov_help"><h2 style="color:#8ad0ff">遊び方</h2><div class="help">・穴の真上から見下ろして遊ぶ<br>・十字キー：ブロックを移動<br>・A / B / C：X軸（横）/ Y軸（縦）/ Z軸（奥行き）まわりに回転<br>・DROP：一気に落とす<br>・落下中は白いワイヤー、着地すると色が付く<br>・左の色帯は積み上がった高さ（白枠が今のブロックの深さ）<br>・1段（FACE）を全部埋めると消える。FACESが0でステージクリア、穴の形が変わる<br>・ブロックが穴の上まで積み上がるとゲームオーバー<br>・ポーズ画面でセーブ・ロードができる</div><button class="b" id="helpx">閉じる</button></div>
+<div class="ov hide" id="ov_pause"><h2 style="color:#8ad0ff">PAUSE</h2><div class="sub">PAUSEボタンでも再開できます</div><button class="b" id="resume">RESUME</button><button class="b" id="restart">RESTART</button><div class="row"><button class="b" id="savebtn">SAVE</button><button class="b" id="loadbtn">LOAD</button></div><div class="sub" id="svmsg"></div><button class="b" id="totitle1">ROUND SELECT</button><button class="b snd">SOUND ON</button><div class="sub" id="ver">VERSION</div></div>
 <div class="ov hide" id="ov_over"><h2>GAME OVER</h2><div id="res" class="help" style="text-align:center"></div><button class="b" id="retry">RETRY</button><button class="b" id="totitle2">ROUND SELECT</button></div>
-<div class="ov hide" id="ov_face"><div id="ftx"></div><div id="fbar"></div><canvas id="fcv" width="200" height="240"></canvas></div><div id="err">エラーが発生しました。再読み込みしてください</div></div></div>
-<div id="ctl">
+<div class="ov hide" id="ov_tut" style="background:rgba(0,0,0,.4);cursor:pointer"><div class="tp" id="tpt" style="position:static;max-width:320px;pointer-events:auto;text-align:center"></div></div><div class="ov hide" id="ov_face"><div id="ftx"></div><div id="fbar"></div><canvas id="fcv" width="200" height="240"></canvas></div><div id="err">エラーが発生しました。再読み込みしてください</div></div></div>
+<div id="ctl"><div class="c g" id="fcw"><i>FACES</i><b id="fc2">00</b></div>
 <div id="dp" role="group" aria-label="十字キー"><div class="b" data-k="u" style="grid-area:1/2">▲</div><div class="b" data-k="l" style="grid-area:2/1">◀</div><div class="hub"></div><div class="b" data-k="r" style="grid-area:2/3">▶</div><div class="b" data-k="d" style="grid-area:3/2">▼</div></div>
 <div id="abc"><button class="b" id="bA" data-a="a" aria-label="X軸回転">A</button><button class="b" id="bB" data-a="b" aria-label="Y軸回転">B</button><button class="b" id="bC" data-a="c" aria-label="Z軸回転">C</button><button class="b" id="drop" data-a="drop" aria-label="ドロップ">DROP</button><button class="b" id="pz2" data-a="pause" aria-label="ポーズ">PAUSE</button></div>
 </div></div>
@@ -110,13 +110,13 @@ function createBoard(){return Array.from({length:S.H},()=>Array.from({length:S.D
 function fits(c,px,py,pz){for(const p of c){const X=px+p[0],Y=py+p[1],Z=pz+p[2];if(X<0||X>=S.W||Z<0||Z>=S.D||Y<0)return false;if(Y<S.H&&S.board[Y][Z][X])return false}return true}
 function nt(){if(!S.bag.length){S.bag=S.r===0?[0,1,5]:[0,1,2,3,4,5];const n=S.bag.length;for(let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[S.bag[i],S.bag[j]]=[S.bag[j],S.bag[i]]}}return S.bag.pop()}
 // ---- ゲーム進行 ----
-function setRound(i){S.r=i;const R=CFG.R[i];S.W=R[1];S.D=R[2];S.H=R[3];S.board=createBoard();S.cur=null;S.queue=[];S.level=R[0];S.faces=R[4];S.score=0;S.cubes=0;S.n=1;S.hi=+ld('bo3d2_hi_'+i,0)||0;sv('bo3d2_r',i);gauge();layout();hud();drawNext()}
+function setRound(i){S.r=i;const R=CFG.R[i];S.W=R[1];S.D=R[2];S.H=R[3];S.board=createBoard();S.cur=null;S.queue=[];S.level=R[0];S.faces=R[4];S.score=0;S.cubes=0;S.n=1;S.clr=null;S.hi=+ld('bo3d2_hi_'+i,0)||0;sv('bo3d2_r',i);gauge();layout();hud();drawNext()}
 function gauge(){const g=$('gauge');g.innerHTML='';for(let y=S.H-1;y>=0;y--){const d=document.createElement('div');d.style.background='#000';d.dataset.y=y;g.appendChild(d)}S.gk=''}
-function resetGame(){const R=CFG.R[S.r];S.board=createBoard();S.score=0;S.level=R[0];S.faces=R[4];S.cubes=0;S.bag=[];S.queue=[nt()];S.cur=null;spawn();hud()}
+function resetGame(){S.clr=null;S.anim=null;S.fl=null;const R=CFG.R[S.r];S.board=createBoard();S.score=0;S.level=R[0];S.faces=R[4];S.cubes=0;S.bag=[];S.queue=[nt()];S.cur=null;spawn();hud()}
 function spawn(){const t=S.queue.shift();S.queue.push(nt());const c=norm(SH[t]),z=size(c);S.cur={t,cells:c,x:(S.W-z[0])>>1,y:S.H-(t===5?1:0),z:(S.D-z[2])>>1};S.acc=0;S.lockT=0;S.resets=0;S.locked=false;S.gk='';S.anim=null;drawNext();if(!fits(c,S.cur.x,S.cur.y,S.cur.z))gameOver()}
 const interval=()=>Math.max(CFG.min,CFG.base*Math.pow(CFG.rate,S.level-1));
 function grounded(){const p=S.cur;return !fits(p.cells,p.x,p.y-1,p.z)}
-function tick(dt){const p=S.cur;if(!p||S.locked)return;const iv=interval();S.acc+=dt;
+function tick(dt){if(S.clr){if(performance.now()>=S.clr.until)finishClear();S.dirty=1;return}const p=S.cur;if(!p||S.locked)return;const iv=interval();S.acc+=dt;
  while(S.acc>=iv){if(!grounded()){p.y--;if(S.anim)S.anim.P[1]--;S.lockT=0;S.acc-=iv}else{S.acc=0;break}}
  if(grounded()){S.lockT+=dt;if(S.lockT>=CFG.lock)lock(0)}else S.lockT=0;S.dirty=1}
 function rotate(ax){const p=S.cur,c=p.cells,m=[0,0,0];for(const q of c)for(let i=0;i<3;i++)m[i]+=q[i]/c.length;let pv=c[0],bd=1e9;for(const q of c){const d=(q[0]-m[0])**2+(q[1]-m[1])**2+(q[2]-m[2])**2;if(d<bd){bd=d;pv=q}}
@@ -135,7 +135,7 @@ function hardDrop(){if(S.locked)return;const p=S.cur;let d=0;while(fits(p.cells,
 function lock(d){if(S.locked||S.st!=='PLAYING')return;S.locked=true;const p=S.cur;
  if(p.cells.some(c=>p.y+c[1]>=S.H)){gameOver();return}for(const c of p.cells)S.board[p.y+c[1]][p.z+c[2]][p.x+c[0]]=1;
  S.cubes+=p.cells.length;S.score+=S.level*(p.cells.length*5+d);
- const keep=S.board.filter(L=>!L.every(r=>r.every(v=>v))),n=S.H-keep.length;
+ const keep=S.board.filter(L=>!L.every(r=>r.every(v=>v))),n=S.H-keep.length;if(n){const full=[];S.board.forEach((L,y)=>{if(L.every(r=>r.every(v=>v)))full.push(y)});S.clr={full,n,keep,pts:100*n*n*S.level,until:performance.now()+700};S.cur=null;S.fl=null;S.dirty=1;beep(660,.12,'triangle',.08,990);setTimeout(()=>beep(880,.12,'triangle',.08,1320),120);setTimeout(()=>beep(1100,.25,'triangle',.08,1650),240);hud();return}
  if(n){while(keep.length<S.H)keep.push(Array.from({length:S.D},()=>Array(S.W).fill(0)));S.board=keep;S.score+=100*n*n*S.level;S.faces-=n;
   if(S.faces<=0){S.faces=0;S.score+=500*S.level;hud();stageClear();return}else beep(660,.18,'triangle',.07,990)}
  else{beep(130,.07,'square',.05);S.fl={c:p.cells.map(c=>[p.x+c[0],p.y+c[1],p.z+c[2]]),u:performance.now()+450}}
@@ -143,19 +143,40 @@ function lock(d){if(S.locked||S.st!=='PLAYING')return;S.locked=true;const p=S.cu
 function gameOver(){S.locked=true;if(S.score>S.hi){S.hi=S.score;sv('bo3d2_hi_'+S.r,S.hi)}
  $('res').innerHTML='SCORE '+S.score.toLocaleString()+'<br>LEVEL '+S.level+' / CUBES '+S.cubes+'<br>HISCORE '+S.hi.toLocaleString();
  hud();beep(300,.5,'sawtooth',.07,60);setState('GAME_OVER')}
-function setState(s){S.st=s;releaseAll();TT.forEach(clearTimeout);TT=[];$('tp').classList.add('hide');const m={LOGO:'logo',TITLE:'title',HELP:'help',PAUSED:'pause',GAME_OVER:'over',FACE:'face'};['logo','title','help','pause','over','face'].forEach(k=>$('ov_'+k).classList.toggle('hide',m[s]!==k));S.dirty=1;syncMusic()}
+function setState(s){S.st=s;releaseAll();TT.forEach(clearTimeout);TT=[];$('tp').classList.add('hide');if(s==='PAUSED')$('svmsg').textContent='';const m={LOGO:'logo',TITLE:'title',HELP:'help',PAUSED:'pause',GAME_OVER:'over',FACE:'face',TUT:'tut'};['logo','title','help','pause','over','face','tut'].forEach(k=>$('ov_'+k).classList.toggle('hide',m[s]!==k));S.dirty=1;syncMusic()}
 function startRound(i){au();setRound(i);resetGame();setState('PLAYING');tut()}
 function toTitle(){setState('TITLE');setRound(S.r)}
 const SEQ=[[4,4,11],[3,4,11],[4,3,11],[3,3,10]];
 const MSG=['SEGMENTATION FAULT','MESSAGE TOO LONG','HOST IS DOWN','FILE SYSTEM FULL','ALARM CLOCK','FILE EXISTS','PROFILING TIME ALARM','TRACE TRAP','TOO MANY LINKS','IDENTIFIER REMOVED','CONNECTION REFUSED','DIRECTORY NOT EMPTY','NO MORE PROCESSES','IPL START','BROKEN PIPE','ILLEGAL OPCODE','ADDRESS ERROR','BAD ADDRESS','FILE TABLE OVERFLOW','A DEADLOCK WOULD OCCUR','INTERRUPT','FILE TOO LARGE'];
 let FT=null,FO=null,TT=[];
+function finishClear(){const C=S.clr;S.clr=null;const keep=C.keep;while(keep.length<S.H)keep.push(Array.from({length:S.D},()=>Array(S.W).fill(0)));S.board=keep;S.score+=C.pts;S.faces-=C.n;
+ if(S.faces<=0){S.faces=0;S.score+=500*S.level;hud();stageClear();return}
+ hud();spawn();S.dirty=1}
+function clearFx(){const C=S.clr,u=1-Math.max(0,(C.until-performance.now())/700),W=S.W,D=S.D;
+ cx.fillStyle='rgba(255,255,170,'+(.4*(1-u)).toFixed(2)+')';
+ for(const y of C.full){path(cx,P,[[0,y+1,0],[W,y+1,0],[W,y+1,D],[0,y+1,D]]);cx.fill()}
+ const f=Math.max(14,P.w*.085),x=P.cx,y=P.cy-u*f*1.5,t=C.n>1?C.n+' FACES CLEAR!':'FACE CLEAR!';
+ cx.save();cx.textAlign='center';cx.textBaseline='middle';cx.lineJoin='round';cx.globalAlpha=Math.min(1,u*4);
+ cx.font='900 '+f+'px ui-monospace,Menlo,monospace';cx.lineWidth=f*.25;cx.strokeStyle='#000';cx.fillStyle='#ffe94a';cx.strokeText(t,x,y);cx.fillText(t,x,y);
+ cx.font='900 '+f*.75+'px ui-monospace,Menlo,monospace';cx.fillStyle='#fff';const s='+'+C.pts;cx.strokeText(s,x,y+f*1.1);cx.fillText(s,x,y+f*1.1);cx.restore()}
+function saveGame(){if(!S.cur||S.clr){$('svmsg').textContent='今はセーブできません';return}
+ const d={v:1,r:S.r,n:S.n,W:S.W,D:S.D,H:S.H,board:S.board,level:S.level,faces:S.faces,score:S.score,cubes:S.cubes,bag:S.bag,queue:S.queue,cur:{t:S.cur.t,cells:S.cur.cells,x:S.cur.x,y:S.cur.y,z:S.cur.z}};
+ sv('bo3d2_save',JSON.stringify(d));$('svmsg').textContent='セーブしました（ラウンド'+(S.r+1)+' / SCORE '+S.score+'）'}
+function loadGame(){let d=null;try{d=JSON.parse(ld('bo3d2_save',''))}catch(e){}
+ if(!d||!d.board||d.board.length!==d.H||!d.cur){$('svmsg').textContent='セーブデータがありません';return}
+ S.r=d.r;S.n=d.n;S.W=d.W;S.D=d.D;S.H=d.H;S.board=d.board;S.level=d.level;S.faces=d.faces;S.score=d.score;S.cubes=d.cubes;S.bag=d.bag||[];S.queue=d.queue&&d.queue.length?d.queue:[nt()];S.cur=d.cur;S.hi=+ld('bo3d2_hi_'+S.r,0)||0;S.locked=false;S.acc=0;S.lockT=0;S.resets=0;S.anim=null;S.clr=null;S.fl=null;
+ gauge();layout();hud();drawNext();S.dirty=1;$('svmsg').textContent='ロードしました。RESUMEで再開します'}
 function stackH(){for(let y=S.H-1;y>=0;y--)if(S.board[y].some(r=>r.some(v=>v)))return y+1;return 0}
 function stageClear(){S.cur=null;S.dirty=1;setState('FACE');beep(520,.5,'triangle',.08,1040);
  $('ftx').innerHTML='';$('fbar').innerHTML=[34,24,40,18].map(w=>'<i style=width:'+w+'px></i>').join('');
  let i=0;clearInterval(FT);FT=setInterval(()=>{if(i<9){$('ftx').innerHTML+=MSG[Math.floor(Math.random()*MSG.length)]+'<br>';i++;beep(900,.02,'square',.02)}else clearInterval(FT)},260);
  clearTimeout(FO);FO=setTimeout(nextStage,3800)}
 function nextStage(){if(S.st!=='FACE')return;clearInterval(FT);S.n++;S.level=Math.min(99,S.level+1);const p=SEQ[(S.n-1)%4];S.W=p[0];S.D=p[1];S.H=p[2];S.faces=CFG.R[S.r][4];S.board=createBoard();gauge();layout();hud();setState('PLAYING');spawn();S.dirty=1}
-function tut(){if(ld('bo3d2_tut','0')==='1')return;sv('bo3d2_tut',1);const m=['USE THE D-PAD TO MOVE.<br>A / B / C ROTATE THE BLOCK.','FILL EVERY FACE OF A LAYER<br>TO CLEAR IT. CLEAR ALL FACES<br>TO ADVANCE TO THE NEXT STAGE.','THE GAME ENDS WHEN BLOCKS<br>REACH THE TOP OF THE PIT.'];
+const TUTM=['十字キーで ブロックを動かします。<br>A・B・Cボタンで ブロックを回します。<br>DROPで 一気に落とします。','1段（FACE）を すべて埋めると<br>その段が消えます。<br>FACESをすべて消すと<br>次のステージへ進みます。','ブロックが 穴の上まで<br>積み上がると ゲームオーバーです。'];
+function tut(){if(ld('bo3d2_tut','0')==='1')return;sv('bo3d2_tut',1);S.ti=0;showTut()}
+function showTut(){$('tpt').innerHTML=TUTM[S.ti]+'<div class="sub" style="margin-top:8px">タップで次へ（'+(S.ti+1)+'/'+TUTM.length+'）</div>';setState('TUT')}
+function nextTut(){if(S.st!=='TUT')return;S.ti++;if(S.ti>=TUTM.length)setState('PLAYING');else showTut()}
+function tutOld(){const m=['USE THE D-PAD TO MOVE.<br>A / B / C ROTATE THE BLOCK.','FILL EVERY FACE OF A LAYER<br>TO CLEAR IT. CLEAR ALL FACES<br>TO ADVANCE TO THE NEXT STAGE.','THE GAME ENDS WHEN BLOCKS<br>REACH THE TOP OF THE PIT.'];
  m.forEach((t,i)=>{TT.push(setTimeout(()=>{$('tp').innerHTML=t;$('tp').classList.remove('hide')},i*4000+300),setTimeout(()=>$('tp').classList.add('hide'),i*4000+3600))})}
 function drawFace(){const g=$('fcv').getContext('2d');g.clearRect(0,0,200,240);
  let q=g.createLinearGradient(0,170,0,240);q.addColorStop(0,'#6a6a74');q.addColorStop(1,'#15151c');g.fillStyle=q;g.fillRect(62,170,76,70);
@@ -167,7 +188,7 @@ function drawFace(){const g=$('fcv').getContext('2d');g.clearRect(0,0,200,240);
  g.fillStyle='rgba(30,30,44,.5)';g.beginPath();g.moveTo(100,100);g.lineTo(88,142);g.lineTo(112,142);g.fill();
  g.lineWidth=3;g.beginPath();g.moveTo(80,168);g.lineTo(120,168);g.stroke();
  g.fillStyle='rgba(0,0,0,.2)';for(let y=0;y<240;y+=3)g.fillRect(0,y,200,1)}
-function hud(){const R=CFG.R[S.r];$('lv').textContent=S.level;$('sc').textContent=String(S.score).padStart(7,'0');$('hi').textContent=String(Math.max(S.hi,S.score)).padStart(7,'0');$('fc').textContent=String(Math.max(0,S.faces)).padStart(2,'0');$('pit').textContent=S.W+'×'+S.D+'×'+S.H;$('cb').textContent=String(S.cubes).padStart(6,'0');$('stg').textContent=S.n}
+function hud(){const R=CFG.R[S.r];$('lv').textContent=S.level;$('sc').textContent=String(S.score).padStart(7,'0');$('hi').textContent=String(Math.max(S.hi,S.score)).padStart(7,'0');$('fc').textContent=String(Math.max(0,S.faces)).padStart(2,'0');$('fc2').textContent=$('fc').textContent;$('pit').textContent=S.W+'×'+S.D+'×'+S.H;$('cb').textContent=String(S.cubes).padStart(6,'0');$('stg').textContent=S.n}
 // ---- 描画（透視投影は pr() の1か所）----
 function pr(Q,x,y,z){const d=Q.H-y,s=d>=0?1/(1+Q.k*d):1-.5*Q.k*d;return [Q.cx+(x-Q.W/2)*Q.c*s,Q.cy+(z-Q.D/2)*Q.c*s]}
 function fq(x,y,z,a,sg){const o=[x,y,z];if(sg>0)o[a]+=1;const b=(a+1)%3,c=(a+2)%3,r=[];for(const ij of[[0,0],[1,0],[1,1],[0,1]]){const p=o.slice();p[b]+=ij[0];p[c]+=ij[1];r.push(p)}return r}
@@ -184,20 +205,27 @@ function pit(){const W=S.W,D=S.D,H=S.H,g=cx,ln=(a,b)=>{const s=pr(P,a[0],a[1],a[
  g.stroke();g.strokeStyle='#7dff7d';g.lineWidth=3;g.beginPath();ln([0,H,0],[W,H,0]);ln([W,H,0],[W,H,D]);ln([W,H,D],[0,H,D]);ln([0,H,D],[0,H,0]);g.stroke()}
 function face(x,y,z,a,sg,col,sh){path(cx,P,fq(x,y,z,a,sg));cx.fillStyle=col;cx.fill();if(sh){cx.fillStyle='rgba(0,0,0,'+sh+')';cx.fill()}cx.lineWidth=1.5;cx.strokeStyle='rgba(0,0,40,.85)';cx.stroke()}
 function solids(){const W=S.W,D=S.D,H=S.H,bd=S.board;const B=(x,y,z)=>x>=0&&x<W&&z>=0&&z<D&&y>=0&&y<H&&bd[y][z][x];
- for(let y=0;y<H;y++){const L=[];for(let z=0;z<D;z++)for(let x=0;x<W;x++)if(bd[y][z][x])L.push([x,z,Math.abs(x+.5-W/2)+Math.abs(z+.5-D/2)]);L.sort((a,b)=>b[2]-a[2]);const col=PAL[y%11];
+ for(let y=0;y<H;y++){const L=[];for(let z=0;z<D;z++)for(let x=0;x<W;x++)if(bd[y][z][x])L.push([x,z,Math.abs(x+.5-W/2)+Math.abs(z+.5-D/2)]);L.sort((a,b)=>b[2]-a[2]);const col=S.clr&&S.clr.full.includes(y)&&((performance.now()/90)|0)%2===0?'#fff':PAL[y%11];
   for(const e of L){const x=e[0],z=e[1];
    if(x+1<=W/2&&!B(x+1,y,z))face(x,y,z,0,1,col,.5);if(x>=W/2&&!B(x-1,y,z))face(x,y,z,0,-1,col,.5);
    if(z+1<=D/2&&!B(x,y,z+1))face(x,y,z,2,1,col,.5);if(z>=D/2&&!B(x,y,z-1))face(x,y,z,2,-1,col,.5);
    if(!B(x,y+1,z))face(x,y,z,1,1,col,0)}}}
 function drawNext(){const g=$('n1').getContext('2d');g.clearRect(0,0,124,124);const t=S.queue[0];if(t===undefined||S.st==='TITLE')return;
  const c=norm(SH[t]),z=size(c),Q={cx:62,cy:62,c:44,k:.1,W:3,D:3,H:3};wire(g,Q,c.map(p=>[p[0]+(3-z[0])/2,p[1]+3-z[1],p[2]+(3-z[2])/2]),'#fff',2)}
+function landHi(p,gy){const cl=p.cells.map(c=>[p.x+c[0],gy+c[1],p.z+c[2]]),set=new Set(cl.map(q=>q.join())),a=.28+.12*Math.sin(performance.now()/160),sz=size(p.cells);
+ cx.fillStyle='rgba(80,255,255,'+a+')';
+ for(const q of cl)if(!set.has([q[0],q[1]+1,q[2]].join())){path(cx,P,fq(q[0],q[1],q[2],1,1));cx.fill()}
+ 
+ 
+ 
+ wire(cx,P,cl,'#8ff',2.8)}
 function fallWire(cl){const A=S.anim,u=A?(performance.now()-A.t)/ROT_MS:1;
  if(!A||u>=1){S.anim=null;wire(cx,P,cl,'#fff',2.2);return}
  const T=k=>{const v=Math.min(1,Math.max(0,u-k)),e=1-Math.pow(1-v,3),th=-RA[A.ax]*(1-e);return q=>{const r=rotA(A.ax,th,[q[0]-A.P[0],q[1]-A.P[1],q[2]-A.P[2]]);return[r[0]+A.P[0],r[1]+A.P[1],r[2]+A.P[2]]}};
  cx.globalAlpha=.18;wire(cx,P,cl,'#fff',2,T(.2));cx.globalAlpha=.35;wire(cx,P,cl,'#fff',2,T(.1));cx.globalAlpha=1;wire(cx,P,cl,'#fff',2.2,T(0))}
-function draw(){cx.clearRect(0,0,P.w,P.h);pit();solids();if(S.fl&&performance.now()<S.fl.u)wire(cx,P,S.fl.c,'#ff3030',3);const p=S.cur;
+function draw(){cx.clearRect(0,0,P.w,P.h);pit();solids();if(S.clr)clearFx();if(S.fl&&performance.now()<S.fl.u)wire(cx,P,S.fl.c,'#ff3030',3);const p=S.cur;
  if(p&&S.st!=='TITLE'){let gy=p.y;while(fits(p.cells,p.x,gy-1,p.z))gy--;
-  if(gy<p.y)wire(cx,P,p.cells.map(c=>[p.x+c[0],gy+c[1],p.z+c[2]]),'rgba(120,255,255,.4)',1.5);
+  if(gy<p.y)landHi(p,gy);
   fallWire(p.cells.map(c=>[p.x+c[0],p.y+c[1],p.z+c[2]]));
   S.ht=stackH();const lo=p.y,hi=p.y+size(p.cells)[1]-1,k=lo+','+hi+','+S.ht;
   if(k!==S.gk){S.gk=k;$('gauge').childNodes.forEach(d=>{const y=+d.dataset.y;d.classList.toggle('cur',y>=lo&&y<=hi);d.style.background=y<S.ht?PAL[y%11]:'#000'})}}
@@ -221,6 +249,8 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(S.st===
 addEventListener('blur',releaseAll);
 ['gesturestart','gesturechange','gestureend','contextmenu','selectstart','dragstart'].forEach(n=>document.addEventListener(n,e=>e.preventDefault()));
 document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
+let lt=0;document.addEventListener('touchend',e=>{const n=Date.now();if(n-lt<350){e.preventDefault();const b=e.target.closest&&e.target.closest('.ov button,#ov_tut,#ov_logo');if(b)b.click()}lt=n},{passive:false});
+document.addEventListener('dblclick',e=>e.preventDefault());
 document.querySelectorAll('[data-a],#dp').forEach(el=>el.addEventListener('touchstart',e=>e.preventDefault(),{passive:false}));
 function snd(){const t='SOUND '+(S.sound?'ON':'OFF');document.querySelectorAll('.snd').forEach(b=>b.textContent=t)}
 document.querySelectorAll('.snd').forEach(b=>b.onclick=()=>{au();S.sound=!S.sound;sv('bo3d_snd',S.sound?1:0);snd();syncMusic();beep(600,.06)});
@@ -228,13 +258,13 @@ $('rounds').innerHTML=CFG.R.map((r,i)=>'<button class="rs" data-r="'+i+'"><b>'+r
 document.querySelectorAll('.rs').forEach(b=>b.onclick=()=>startRound(+b.dataset.r));
 $('retry').onclick=()=>startRound(S.r);$('restart').onclick=()=>startRound(S.r);
 $('howto').onclick=()=>setState('HELP');$('helpx').onclick=()=>setState('TITLE');
-$('resume').onclick=()=>setState('PLAYING');$('totitle1').onclick=toTitle;$('totitle2').onclick=toTitle;
+$('resume').onclick=()=>setState('PLAYING');$('savebtn').onclick=saveGame;$('loadbtn').onclick=loadGame;$('ov_tut').onclick=nextTut;$('totitle1').onclick=toTitle;$('totitle2').onclick=toTitle;
 // ---- 起動 ----
 function fail(e){console.error(e);$('err').style.display='block'}
 addEventListener('error',fail);
 let last=0;
 function loop(t){requestAnimationFrame(loop);const dt=Math.min(100,t-last||16);last=t;try{if(S.st==='PLAYING')tick(dt);if(S.dirty)draw()}catch(e){fail(e)}}
-try{S.sound=ld('bo3d_snd','1')!=='0';snd();$('ver').textContent='VERSION 1.0.4 (2026-10-19)';const r=+ld('bo3d2_r',1);setRound(CFG.R[r]?r:1);drawFace();$('ov_logo').onclick=()=>{au();setState('TITLE')};setState('LOGO')}catch(e){fail(e)}
+try{S.sound=ld('bo3d_snd','1')!=='0';snd();$('ver').textContent='VERSION 1.1.0 (2026-10-21)';const r=+ld('bo3d2_r',1);setRound(CFG.R[r]?r:1);drawFace();$('ov_logo').onclick=()=>{au();setState('TITLE')};setState('LOGO')}catch(e){fail(e)}
 new ResizeObserver(layout).observe(pitw);addEventListener('resize',layout);addEventListener('orientationchange',()=>setTimeout(layout,200));
 requestAnimationFrame(loop);
 </script></body></html>
